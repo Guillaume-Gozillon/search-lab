@@ -1,6 +1,6 @@
-import client from "../client.js";
+import client from '../client.js'
 
-const INDEX = "products";
+const INDEX = 'products'
 
 // TODO: Experiment with multi_match, phrase matching, fuzziness, and boosting
 async function fullTextSearch(query: string) {
@@ -10,20 +10,20 @@ async function fullTextSearch(query: string) {
       query: {
         multi_match: {
           query,
-          fields: ["title^3", "description"],
-          fuzziness: "AUTO",
-        },
-      },
+          fields: ['title^3', 'description'],
+          fuzziness: 'AUTO'
+        }
+      }
     },
-    size: 10,
-  });
+    size: 10
+  })
 
-  console.log(`Found ${result.hits.total} results for "${query}":\n`);
+  console.log(`Found ${result.hits.total} results for "${query}":\n`)
   for (const hit of result.hits.hits) {
-    const src = hit._source as Record<string, unknown>;
-    console.log(`  [${hit._score?.toFixed(2)}] ${src.title}`);
+    const src = hit._source as Record<string, unknown>
+    console.log(`  [${hit._score?.toFixed(2)}] ${src.title}`)
   }
 }
 
-const term = process.argv[2] ?? "wireless headphones";
-await fullTextSearch(term);
+const term = process.argv[2] ?? 'wireless headphones'
+await fullTextSearch(term)

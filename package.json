@@ -13,7 +13,8 @@
     "query:pagination": "tsx src/queries/pagination.ts",
     "agg:facets": "tsx src/aggregations/facets.ts",
     "agg:analytics": "tsx src/aggregations/analytics.ts",
-    "vector:search": "tsx src/vector/semantic-search.ts"
+    "vector:search": "tsx src/vector/semantic-search.ts",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.17.0",
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.0",
+    "prettier": "^3.8.2",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }

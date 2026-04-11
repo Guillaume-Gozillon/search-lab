@@ -25,22 +25,22 @@ See [`datasets/README.md`](datasets/README.md) for download instructions.
 
 ## Scripts
 
-| Command                | Description              |
-| ---------------------- | ------------------------ |
-| `npm run index:mapping` | Create index mapping     |
-| `npm run index:bulk`    | Bulk-index the CSV       |
-| `npm run query:fulltext`| Full-text search         |
-| `npm run query:filters` | Bool / filter queries    |
+| Command                    | Description           |
+| -------------------------- | --------------------- |
+| `npm run index:mapping`    | Create index mapping  |
+| `npm run index:bulk`       | Bulk-index the CSV    |
+| `npm run query:fulltext`   | Full-text search      |
+| `npm run query:filters`    | Bool / filter queries |
 | `npm run query:pagination` | Pagination strategies |
-| `npm run agg:facets`    | Faceted search           |
-| `npm run agg:analytics` | Aggregation analytics    |
-| `npm run vector:search` | Semantic / kNN search    |
+| `npm run agg:facets`       | Faceted search        |
+| `npm run agg:analytics`    | Aggregation analytics |
+| `npm run vector:search`    | Semantic / kNN search |
 
 ## Articles
 
-| # | Title | Link |
-|---|-------|------|
-|   |       |      |
+| #   | Title | Link |
+| --- | ----- | ---- |
+|     |       |      |
 
 ## Stack
 

@@ -15,9 +15,9 @@
 
 ### Expected files
 
-| File                     | Description                        |
-| ------------------------ | ---------------------------------- |
-| `amazon_products.csv`    | ~1.4M products with price, rating, etc. |
-| `amazon_categories.csv`  | Category hierarchy                 |
+| File                    | Description                             |
+| ----------------------- | --------------------------------------- |
+| `amazon_products.csv`   | ~1.4M products with price, rating, etc. |
+| `amazon_categories.csv` | Category hierarchy                      |
 
 > **Note:** CSV files are git-ignored. Do not commit them to the repository.
