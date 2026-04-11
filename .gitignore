@@ -4,3 +4,15 @@ CLAUDE.md
 
 # IDE
 .idea/
+
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Environment
+.env
+
+# Datasets (large CSV files)
+datasets/*.csv

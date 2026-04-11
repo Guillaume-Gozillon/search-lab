@@ -1,0 +1,27 @@
+{
+  "name": "search-lab",
+  "version": "1.0.0",
+  "description": "Elasticsearch experiments with TypeScript",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx",
+    "client": "tsx src/client.ts",
+    "index:mapping": "tsx src/indexing/mapping.ts",
+    "index:bulk": "tsx src/indexing/bulk-index.ts",
+    "query:fulltext": "tsx src/queries/full-text.ts",
+    "query:filters": "tsx src/queries/filters.ts",
+    "query:pagination": "tsx src/queries/pagination.ts",
+    "agg:facets": "tsx src/aggregations/facets.ts",
+    "agg:analytics": "tsx src/aggregations/analytics.ts",
+    "vector:search": "tsx src/vector/semantic-search.ts"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.17.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
