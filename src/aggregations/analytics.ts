@@ -1,27 +1,25 @@
 import client from '../client.js'
 
-const INDEX = 'products'
+const index = 'products'
 
 async function analytics() {
   const result = await client.search({
-    index: INDEX,
-    body: {
-      size: 0,
-      aggs: {
-        top_categories: {
-          terms: { field: 'category', size: 5 },
-          aggs: {
-            avg_price: { avg: { field: 'price' } },
-            avg_stars: { avg: { field: 'stars' } },
-            total_bought: { sum: { field: 'boughtInLastMonth' } }
-          }
-        },
-        price_stats: {
-          extended_stats: { field: 'price' }
-        },
-        best_sellers_count: {
-          filter: { term: { isBestSeller: true } }
+    index,
+    size: 0,
+    aggs: {
+      top_categories: {
+        terms: { field: 'category', size: 5 },
+        aggs: {
+          avg_price: { avg: { field: 'price' } },
+          avg_stars: { avg: { field: 'stars' } },
+          total_bought: { sum: { field: 'boughtInLastMonth' } }
         }
+      },
+      price_stats: {
+        extended_stats: { field: 'price' }
+      },
+      best_sellers_count: {
+        filter: { term: { isBestSeller: true } }
       }
     }
   })

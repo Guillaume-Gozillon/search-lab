@@ -1,17 +1,15 @@
 import client from '../client.js'
 
-const INDEX = 'products'
+const index = 'products'
 
 // TODO: Compare from/size vs search_after for deep pagination
 async function paginateWithFromSize(page: number, pageSize: number) {
   const from = (page - 1) * pageSize
 
   const result = await client.search({
-    index: INDEX,
-    body: {
-      query: { match_all: {} },
-      sort: [{ price: 'desc' }, { _score: 'desc' }]
-    },
+    index,
+    query: { match_all: {} },
+    sort: [{ price: 'desc' }, { _score: { order: 'desc' } }],
     from,
     size: pageSize
   })
@@ -27,16 +25,14 @@ async function paginateWithFromSize(page: number, pageSize: number) {
 
 // TODO: Implement search_after pagination using the sort values from the last hit
 async function paginateWithSearchAfter(
-  searchAfter: unknown[],
+  searchAfter: Array<string | number | boolean | null>,
   pageSize: number
 ) {
   const result = await client.search({
-    index: INDEX,
-    body: {
-      query: { match_all: {} },
-      sort: [{ price: 'desc' }, { _score: 'desc' }],
-      search_after: searchAfter
-    },
+    index,
+    query: { match_all: {} },
+    sort: [{ price: 'desc' }, { _score: { order: 'desc' } }],
+    search_after: searchAfter,
     size: pageSize
   })
 
@@ -49,5 +45,8 @@ async function paginateWithSearchAfter(
 
 const lastSort = await paginateWithFromSize(1, 5)
 if (lastSort) {
-  await paginateWithSearchAfter(lastSort, 5)
+  await paginateWithSearchAfter(
+    lastSort as Array<string | number | boolean | null>,
+    5
+  )
 }

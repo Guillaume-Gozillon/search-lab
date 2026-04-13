@@ -1,21 +1,19 @@
 import client from '../client.js'
 
-const INDEX = 'products'
+const index = 'products'
 
 // TODO: Combine bool queries with must / filter / should / must_not
 async function filteredSearch() {
   const result = await client.search({
-    index: INDEX,
-    body: {
-      query: {
-        bool: {
-          must: [{ match: { title: 'laptop' } }],
-          filter: [
-            { range: { price: { gte: 500, lte: 1500 } } },
-            { term: { isBestSeller: true } },
-            { range: { stars: { gte: 4.0 } } }
-          ]
-        }
+    index,
+    query: {
+      bool: {
+        must: [{ match: { title: 'laptop' } }],
+        filter: [
+          { range: { price: { gte: 500, lte: 1500 } } },
+          { term: { isBestSeller: true } },
+          { range: { stars: { gte: 4.0 } } }
+        ]
       }
     },
     size: 10

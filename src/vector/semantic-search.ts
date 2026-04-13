@@ -1,38 +1,36 @@
 import client from '../client.js'
 
-const INDEX = 'products-vector'
+const index = 'products-vector'
 
 // TODO: Choose an embedding model and integrate it (e.g. Elasticsearch inference API, OpenAI, etc.)
 // TODO: Create an ingest pipeline with an inference processor for automatic embedding
 
 async function createVectorIndex() {
-  const exists = await client.indices.exists({ index: INDEX })
+  const exists = await client.indices.exists({ index: index })
   if (exists) {
-    console.log(`Index "${INDEX}" already exists — skipping creation.`)
+    console.log(`Index "${index}" already exists — skipping creation.`)
     return
   }
 
   await client.indices.create({
-    index: INDEX,
-    body: {
-      mappings: {
-        properties: {
-          title: { type: 'text' },
-          description: { type: 'text' },
-          category: { type: 'keyword' },
-          // TODO: Set dims to match the chosen embedding model
-          title_vector: {
-            type: 'dense_vector',
-            dims: 384,
-            index: true,
-            similarity: 'cosine'
-          }
+    index,
+    mappings: {
+      properties: {
+        title: { type: 'text' },
+        description: { type: 'text' },
+        category: { type: 'keyword' },
+        // TODO: Set dims to match the chosen embedding model
+        title_vector: {
+          type: 'dense_vector',
+          dims: 384,
+          index: true,
+          similarity: 'cosine'
         }
       }
     }
   })
 
-  console.log(`Vector index "${INDEX}" created.`)
+  console.log(`Vector index "${index}" created.`)
 }
 
 // TODO: Replace with real embeddings from a model
@@ -44,16 +42,14 @@ async function semanticSearch(query: string) {
   const queryVector = mockEmbedding(query)
 
   const result = await client.search({
-    index: INDEX,
-    body: {
-      knn: {
-        field: 'title_vector',
-        query_vector: queryVector,
-        k: 10,
-        num_candidates: 50
-      },
-      _source: ['title', 'category']
-    }
+    index,
+    knn: {
+      field: 'title_vector',
+      query_vector: queryVector,
+      k: 10,
+      num_candidates: 50
+    },
+    _source: ['title', 'category']
   })
 
   console.log(`Semantic search results for "${query}":\n`)
